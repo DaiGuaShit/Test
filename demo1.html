@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    const list = [
+        {
+            "begintime": "2022-12-02 00:00:00",
+            "endtime": "2022-12-07 24:00:00",
+        },
+        {
+            "begintime": "2022-12-06 00:00:00",
+            "endtime": "2022-12-09 24:00:00",
+        },
+        {
+            "begintime": "2022-12-08 00:00:00",
+            "endtime": "2022-12-10 24:00:00",
+        },
+        {
+            "begintime": "2022-12-09 00:00:00",
+            "endtime": "2022-12-11 24:00:00",
+        },
+        {
+            "begintime": "2022-12-10 00:00:00",
+            "endtime": "2022-12-11 24:00:00",
+        }
+    ]
+
+    const blockList = [];
+
+    function demo(list) {
+        if (list.length > 0) {
+            list.forEach((el) => {
+                const index = findOne(blockList, el.begintime);
+                if (index === "") {
+                    blockList.push([el]);
+                } else {
+                    blockList[index] = [...blockList[index], el];
+                }
+            });
+        }
+
+        return blockList;
+    }
+
+    function findOne(blockList, begintime) {
+        for (let i = 0; i < blockList.length; i++) {
+            if (blockList[i][blockList[i].length - 1]["endtime"] < begintime) {
+                return i;
+            }
+        }
+        return "";
+    }
+
+    demo(list)
+    console.log(blockList);
+</script>
